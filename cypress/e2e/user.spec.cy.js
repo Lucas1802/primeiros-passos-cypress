@@ -14,8 +14,8 @@ describe('Orange HRM Tests', () => {
     middleNameField: "[name='middleName']",
     lastNameField: "[name='lastName']",
     genericField: '.oxd-input',
-    dateField: "[placeholder='yyyy-dd-mm']",
     dateCloseButton: ".--close",
+    dateField: "[placeholder='yyyy-dd-mm']",
     submitButton: "[type='submit']",
     eventSucess: ".oxd-toast"
   }
@@ -36,9 +36,9 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorList.genericField).eq(5).clear().type('0000000000')
     cy.get(selectorList.genericField).eq(6).clear().type('000000')
     cy.get(selectorList.genericField).eq(7).clear().type('test123')
-    cy.get(selectorList.genericField).eq(8).clear().type('2025-12-25')
+    cy.get(selectorList.genericField).eq(8).type('2025-12-25')
     cy.get(selectorList.dateCloseButton).click()
-    cy.get(selectorList.genericField).eq(9).clear().type('1999-01-01')
+    cy.get(selectorList.genericField).eq(9).type('1999-01-01')
     cy.get(selectorList.dateCloseButton).click()
     cy.get(selectorList.genericField).eq(10).clear().type('0000000000')
     cy.get(selectorList.genericField).eq(11).clear().type('000')
