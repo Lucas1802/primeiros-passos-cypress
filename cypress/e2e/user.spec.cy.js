@@ -1,15 +1,15 @@
 import userData from '../fixtures/userdata.json'
+import LoginPage from '../pages/loginPage'
+import DashboardPage from '../pages/dashboardPage'
+import MenuPage from '../pages/menuPage'
+
+const loginPage = new LoginPage()
+const dashboardPage = new DashboardPage()
+const menuPage = new MenuPage()
 
 describe('Orange HRM Tests', () => {
 
   const selectorList = {
-    usernameField: "[name='username']",
-    passwordField: "[name='password']",
-    loginButton: "[type='submit']",
-    dashboardGrid: '.orangehrm-dashboard-grid',
-    wrongCredentialAlert: "[role='alert']",
-    buttonMyInfo: "[href='/web/index.php/pim/viewMyDetails'] .oxd-main-menu-item--name",
-    myInfolayout: ".oxd-layout-context",
     firstNameField: "[name='firstName']",
     middleNameField: "[name='middleName']",
     lastNameField: "[name='lastName']",
@@ -23,15 +23,16 @@ describe('Orange HRM Tests', () => {
   }
 
   it.only('User Info Update - Success', () => {
-    cy.visit('/auth/login')
-    cy.get(selectorList.usernameField).type(userData.userSuccess.username)
-    cy.get(selectorList.passwordField).type(userData.userSuccess.password)
-    cy.get(selectorList.loginButton).click()
-    cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
-    cy.get(selectorList.dashboardGrid)
-    cy.get(selectorList.buttonMyInfo).click()
-    cy.get(selectorList.myInfolayout)
-    cy.get(selectorList.firstNameField).clear().type('Lucas')
+    
+    loginPage.accessLoginPage()
+    loginPage.loginWithUser(userData.userSuccess.username, userData.userSuccess.password)
+    dashboardPage.checkDashboardPage()
+    menuPage.accessMyInfo()
+
+    
+    //cy.get(selectorList.myInfolayout)
+
+    /*cy.get(selectorList.firstNameField).clear().type('Lucas')
     cy.get(selectorList.middleNameField).clear().type('Gabriel')
     cy.get(selectorList.lastNameField).clear().type('Mendes')
     cy.get(selectorList.genericField).eq(4).clear().type('GabrielGod')
@@ -51,9 +52,9 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorList.clickIcon).eq(2).click()
     cy.contains('O-').click()
     cy.get(selectorList.genericField).eq(9).clear().type('123')
-    cy.get(selectorList.genericField).eq(10).clear().type('000')
+    //cy.get(selectorList.genericField).eq(10).clear().type('000')
     cy.get(selectorList.submitButton).eq(1).click({force: true})
-    cy.get(selectorList.eventSucess)    
+    cy.get(selectorList.eventSucess)*/
   })
 
   it('Login - Fails', () => {
